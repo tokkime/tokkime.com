@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>tokkime</title>
+
+<!-- fontes -->
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=DotGothic16&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SolidZORO/zpix-pixel-font@latest/dist/zpix.css">
+
+<style>
+	*{margin:0;padding:0;box-sizing:border-box;}
+	html,body{user-select:none;}
+
+    #title,
+    #subtitle{   
+        line-height:1.2;
+        min-height:1.2em;
+        }
+
+	body{
+		background:#000;color:#fff;
+		font-family:'Press Start 2P',monospace;
+		min-height:100vh;
+		display:flex;justify-content:center;align-items:center;
+	}
+
+	main{text-align:center;}
+
+	/* ocidentais */
+	#title{
+		font-size:clamp(0.6rem,1.4vw,1rem);
+		letter-spacing:1px;
+		transition:opacity .25s;
+	}
+	#subtitle{
+		font-size:clamp(0.45rem,1.1vw,0.8rem);
+		color:#888;margin-top:0.45rem;
+		transition:opacity .25s;
+	}
+
+	/* japones */
+	.ja{font-family:'DotGothic16','Press Start 2P',monospace;letter-spacing:0;}
+	.ja#title{font-size:clamp(0.9rem,2.4vw,1.6rem);}
+	.ja#subtitle{font-size:clamp(0.7rem,1.8vw,1.2rem);}
+
+	/* chines */
+	.zh{font-family:'Zpix','Press Start 2P',monospace;letter-spacing:0;}
+	.zh#title{font-size:clamp(0.9rem,2.4vw,1.6rem);}
+	.zh#subtitle{font-size:clamp(0.7rem,1.8vw,1.2rem);}
+
+	img{
+		width:clamp(90px,12vw,150px);
+		height:auto;margin-top:0.9rem;
+		-webkit-user-drag:none;pointer-events:none;
+	}
+
+	#lang-select{
+		position:fixed;bottom:8px;left:50%;transform:translateX(-50%);
+		font-size:0.85rem;
+		font-family:'Press Start 2P',monospace;
+		background:#000;color:#fff;border:1px solid #fff;
+		padding:5px 10px;cursor:pointer;
+	}
+</style>
+</head>
+<body>
+	<main>
+		<p id="title"></p>
+		<p id="subtitle"></p>
+
+		<img src="https://media.tenor.com/3VBHKW5BrKoAAAAj/default-dance-fortnite-dance.gif"
+		     draggable="false" alt="Fortnite default dance GIF">
+	</main>
+
+	<select id="lang-select">
+		<option value="en" selected>English</option>
+		<option value="pt">Português</option>
+		<option value="es">Español</option>
+		<option value="ja">日本語</option>
+		<option value="zh">中文</option>
+	</select>
+
+<script>
+const translations={
+	en:{title:"UNDER CONSTRUCTION",sub:"And it's probably going to stay that way for a long time..."},
+	pt:{title:"EM CONSTRUÇÃO",     sub:"E provavelmente vai continuar assim por um bom tempo..."},
+	es:{title:"EN CONSTRUCCIÓN",   sub:"Y probablemente seguirá así durante mucho tiempo..."},
+	ja:{title:"工事中",            sub:"しかも長い間このままかも……"},
+	zh:{title:"施工中",            sub:"而且很可能会长期保持这样……"}
+};
+
+const ttl=document.getElementById('title');
+const sub=document.getElementById('subtitle');
+const select=document.getElementById('lang-select');
+
+let subtitleTimer;
+function clearTimers(){
+	clearInterval(ttl._tw); clearInterval(sub._tw);
+	clearTimeout(subtitleTimer);
+}
+
+function typeWriter(el,text,speed,cb){
+	clearInterval(el._tw);
+	el.textContent='';
+	let i=0;
+	el._tw=setInterval(()=>{
+		el.textContent+=text.charAt(i++);
+		if(i>=text.length){ clearInterval(el._tw); cb && cb(); }
+	},speed);
+}
+
+function setLang(lang){
+	clearTimers();
+
+	ttl.style.opacity=0;
+	sub.style.opacity=0;
+
+	setTimeout(()=>{
+		ttl.className=''; sub.className='';
+		if(lang==='ja'){ttl.classList.add('ja');sub.classList.add('ja');}
+		if(lang==='zh'){ttl.classList.add('zh');sub.classList.add('zh');}
+
+		ttl.style.opacity=1;
+        
+		typeWriter(ttl, translations[lang].title, 80, ()=>{
+			subtitleTimer=setTimeout(()=>{
+				sub.style.opacity=1;
+				typeWriter(sub, translations[lang].sub, 50);
+			},1000);
+
+		});
+	},250);
+}
+
+select.addEventListener('change',e=>setLang(e.target.value));
+window.addEventListener('DOMContentLoaded',()=>setLang('en'));
+</script>
+</body>
+</html>
+
+<!-- por hoje é so pessoal -->
