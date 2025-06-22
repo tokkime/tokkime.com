@@ -1,0 +1,350 @@
+body {
+    font-family: 'Lora', serif;
+    margin: 0;
+    background-color: #ffffff;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 30px;
+    box-sizing: border-box;
+    opacity: 0;
+    filter: blur(8px);
+    transition: opacity 0.9s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                filter 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+    font-size: 13px;
+}
+
+.main-container {
+    max-width: 560px;
+    width: 100%;
+    text-align: left;
+}
+
+.profile-pic {
+    display: block;
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin: 0 0 20px 0;
+}
+
+header {
+    margin-bottom: 10px;
+}
+
+header h1 {
+    font-size: 1.6em;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.bio {
+    font-size: 0.9em;
+    max-width: 480px;
+    margin-bottom: 20px;
+    line-height: 1.65;
+    color: #333;
+}
+
+.nav-link a,
+.portfolio-link a {
+    font-size: 0.95em;
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.nav-link a:hover,
+.portfolio-link a:hover {
+    text-decoration: underline;
+}
+
+.nav-link .arrow,
+.portfolio-link .arrow {
+    margin-left: 4px;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.details-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.column {
+    width: 31%;
+}
+
+.column h2 {
+    font-size: 0.75em;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #444;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.column ul li {
+    margin-bottom: 6px;
+    font-size: 0.85em;
+    color: #333;
+}
+
+.column ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.column ul li a:hover {
+    text-decoration: underline;
+}
+
+.column ul li .arrow {
+    margin-left: 4px;
+    color: #777;
+}
+
+.work-section {
+    margin-bottom: 25px;
+}
+
+.work-section h2 {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #000000;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.placeholder-text {
+    font-size: 0.9em;
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+#thumbnail-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.thumbnail-item {
+    width: calc(33.333% - 8px);
+    box-sizing: border-box;
+    border: none;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(5px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
+                filter 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.thumbnail-item.item-loaded {
+    opacity: 1;
+    transform: translateY(0);
+    filter: none;
+}
+
+.thumbnail-image-wrapper {
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    line-height: 0;
+    background-color: #f0f0f0;
+}
+
+.thumbnail-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out 0.1s;
+}
+
+.thumbnail-item.item-loaded img {
+    opacity: 1;
+}
+
+.thumbnail-image-wrapper:hover img {
+    transform: scale(1.04);
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.thumbnail-caption {
+    font-size: 0.78em;
+    color: #444;
+    padding: 8px 2px 0 2px;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.thumbnail-caption a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.thumbnail-caption a:hover {
+    text-decoration: underline;
+}
+
+#video-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+.video-item {
+    width: calc(50% - 7.5px);
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(5px);
+    transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1),
+                filter 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.video-item.item-loaded {
+    opacity: 1;
+    transform: translateY(0);
+    filter: none;
+}
+
+.video-iframe-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    background-color: #e9e9e9;
+}
+
+.video-item iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.video-caption {
+    font-size: 0.8em;
+    color: #555;
+    padding: 8px 2px 0 2px;
+    text-align: left;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) { 
+    .thumbnail-item { 
+        width: calc(50% - 6px); 
+    } 
+}
+
+@media (max-width: 600px) { 
+    body { 
+        padding: 20px; 
+        align-items: flex-start; 
+        padding-top: 25px; 
+        font-size: 12.5px; 
+    } 
+    .main-container { 
+        max-width: 100%; 
+    } 
+    .profile-pic { 
+        margin: 0 auto 20px auto; 
+    } 
+    .main-container, header { 
+        text-align: center; 
+    } 
+    .bio { 
+        margin-left: auto; 
+        margin-right: auto; 
+    } 
+    .details-section { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px; 
+    } 
+    .column { 
+        width: 100%; 
+        max-width: 280px; 
+        text-align: left; 
+    } 
+    .column h2 { 
+        text-align: center; 
+    } 
+    .column ul { 
+        display: inline-block; 
+        text-align: left; 
+        width: 100%; 
+    } 
+    .work-section h2 { 
+        font-size: 1em; 
+        text-align: center; 
+    } 
+    .video-item { 
+        width: 100%; 
+    } 
+}
+
+@media (max-width: 480px) { 
+    .thumbnail-item { 
+        width: 100%; 
+        margin-bottom: 12px; 
+    } 
+    #thumbnail-gallery, #video-gallery { 
+        gap: 12px; 
+    } 
+    body { 
+        font-size: 12px; 
+    } 
+    .profile-pic { 
+        width: 60px; 
+        height: 60px; 
+    } 
+    header h1 { 
+        font-size: 1.5em; 
+    } 
+}

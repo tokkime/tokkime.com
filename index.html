@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tokkime.com</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main-container">
+        <img src="https://files.catbox.moe/6k2nsw.jpg" alt="Tokkime Profile" class="profile-pic">
+        <header>
+            <h1>tokkime.com</h1>
+            <p class="bio">
+                Video editor and thumbnail creator, 7+ years of experience.
+                Focused on delivering high-quality, creative visual content.
+                Fluent in English & Portuguese.
+            </p>
+            <p class="portfolio-link">
+                <a href="my-work.html">My Work <span class="arrow">↗</span></a>
+            </p>
+        </header>
+
+        <hr class="separator">
+
+        <section class="details-section">
+            <div class="column">
+                <h2>CONTACT</h2>
+                <ul>
+                    <li><a href="https://twitter.com/your_twitter" target="_blank">Twitter <span class="arrow">↗</span></a></li>
+                    <li><a href="https://discord.com/users/your_discord_id" target="_blank">Discord <span class="arrow">↗</span></a></li>
+                    <li><a href="mailto:your_email@example.com">Email <span class="arrow">↗</span></a></li>
+                </ul>
+            </div>
+            <div class="column">
+                <h2>TOOLS</h2>
+                <ul>
+                    <li>After Effects</li>
+                    <li>Premiere Pro</li>
+                    <li>Photoshop</li>
+                    <li>Blender</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h2>SKILLS</h2>
+                <ul>
+                    <li>Video Editing</li>
+                    <li>Thumbnail Design</li>
+                    <li>Coding</li>
+                    <li>Youtube Producer</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script src="js/script.js" defer></script>
+    <script defer>
+        async function prefetchThumbnails() {
+            try {
+                const response = await fetch('thumbnails/thumbnails.txt');
+                if (!response.ok) {
+                    return;
+                }
+                const text = await response.text();
+                const lines = text.split('\n').filter(line => line.trim() !== '');
+                lines.forEach(line => {
+                    const parts = line.split(/\s+/);
+                    const imageUrl = parts.shift();
+                    if (imageUrl) {
+                        const img = new Image();
+                        img.src = imageUrl;
+                    }
+                });
+            } catch (error) {
+                console.warn('Prefetch: Error processing thumbnails.txt:', error);
+            }
+        }
+        window.addEventListener('load', () => {
+            setTimeout(prefetchThumbnails, 1000);
+        });
+    </script>
+</body>
+</html>
